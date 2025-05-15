@@ -1,0 +1,41 @@
+name: Build EXE with PyInstaller
+
+on:
+  push:
+    tags:
+      - 'v*'  # v1.0.0 などのタグをpushしたときのみ動作
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: チェックアウト
+        uses: actions/checkout@v3
+
+      - name: Python をセットアップ
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: 依存関係をインストール
+        run: |
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: PyInstaller で exe をビルド
+        run: |
+          pyinstaller gla.py --onefile --noconsole --name=gla_viewer
+
+      - name: ビルド成果物をアップロード
+        uses: actions/upload-artifact@v3
+        with:
+          name: gla_viewer
+          path: dist/gla_viewer.exe
+
+      - name: GitHubリリースに自動アップロード
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/gla_viewer.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
