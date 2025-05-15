@@ -1,0 +1,10 @@
+image: Visual Studio 2022
+
+build_script:
+  - cmd: pip install -r requirements.txt
+  - cmd: pip install pyinstaller
+  - cmd: pyinstaller gla.py --onefile --noconsole --name gla_viewer
+
+artifacts:
+  - path: dist\gla_viewer.exe
+    name: gla_viewer
