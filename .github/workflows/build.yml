@@ -27,13 +27,14 @@ jobs:
         run: pyinstaller gla.py --onefile --noconsole --name=gla_viewer
 
       - name: ビルド成果物をアップロード
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3.1.3
         with:
           name: gla_viewer
           path: dist/gla_viewer.exe
 
-      - name: GitHubリリースに自動アップロード
-        uses: softprops/action-gh-release@v1
+     - name: GitHubリリースに自動アップロード
+       uses: softprops/action-gh-release@v1.1.1
+
         with:
           files: dist/gla_viewer.exe
         env:
