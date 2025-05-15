@@ -38,4 +38,3 @@ jobs:
           files: dist/gla_viewer.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
