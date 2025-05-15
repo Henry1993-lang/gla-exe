@@ -32,10 +32,10 @@ jobs:
           name: gla_viewer
           path: dist/gla_viewer.exe
 
-     - name: GitHubリリースに自動アップロード
-       uses: softprops/action-gh-release@v1.1.1
-
+      - name: GitHubリリースに自動アップロード
+        uses: softprops/action-gh-release@v1.1.1
         with:
           files: dist/gla_viewer.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
