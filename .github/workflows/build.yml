@@ -3,7 +3,7 @@ name: Build EXE with PyInstaller
 on:
   push:
     tags:
-      - 'v*'  # v1.0.0 などのタグをpushしたときのみ動作
+      - 'v*'
 
 jobs:
   build:
@@ -24,8 +24,7 @@ jobs:
           pip install pyinstaller
 
       - name: PyInstaller で exe をビルド
-        run: |
-          pyinstaller gla.py --onefile --noconsole --name=gla_viewer
+        run: pyinstaller gla.py --onefile --noconsole --name=gla_viewer
 
       - name: ビルド成果物をアップロード
         uses: actions/upload-artifact@v3
